@@ -1,1 +1,94 @@
-﻿<label style="padding-left: 20px ">Opis wkrótce...</label>
+﻿
+<h1 ng-show="!customerDTO.id" ng-cloak>New customer!</h1>
+<h1 ng-show="!!customerDTO.id" ng-cloak>Update Customer!</h1>
+
+<form name="form" ng-submit="save()" novalidate>
+
+    <div class="panel panel-default width30p inner">
+        <div class="panel-heading">Customer data</div>
+        <div class="panel-body text-justify">
+
+            <div class="form-group">
+                <label>Symbol</label>
+                <input type="text" name="symbol" ng-model="customerDTO.symbol" ng-minlength="3" ng-maxlength="30" ng-required="true" />
+
+                <p class="text-danger no-margin error" ng-show="(form.symbol.$invalid || form.symbol.$error.minlength) && (form.symbol.$dirty || form.$submitted)">Symbol powinien składać się minimalnie z 3 znaków</p>
+                <p class="text-danger no-margin error" ng-show="form.symbol.$error.maxlength && (form.symbol.$dirty || form.$submitted)">Symbol powinien składać się maksymalnie ze 100 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" ng-model="customerDTO.name" ng-minlength="3" ng-maxlength="100" ng-required="true" />
+
+                <p class="text-danger no-margin error" ng-show="(form.name.$invalid || form.name.$error.minlength) && (form.name.$dirty || form.$submitted)">Nazwa powinna składać się minimalnie z 3 znaków</p>
+                <p class="text-danger no-margin error" ng-show="form.name.$error.maxlength && (form.name.$dirty || form.$submitted)">Nazwa powinna składać się maksymalnie ze 100 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>NIP</label>
+                <input type="text" name="nip" ng-model="customerDTO.nip" ng-minlength="10" ng-maxlength="10" ng-required="true" maxlength="10"/>
+
+                <p class="text-danger no-margin error" ng-show="(form.nip.$invalid || form.nip.$error.minlength) && (form.nip.$dirty || form.$submitted)">Numer NIP powinien składać się z 10 znaków</p>
+                <p class="text-danger no-margin error" ng-show="form.nip.$error.maxlength && (form.nip.$dirty || form.$submitted)">Numer NIP powinien składać się z 10 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>Regon</label>
+                <input type="text" name="regon" ng-model="customerDTO.regon" maxlength="9" />
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phoneNumber" ng-model="customerDTO.phoneNumber" maxlength="15" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default width30p inner">
+        <div class="panel-heading">Address Data</div>
+        <div class="panel-body text-justify">
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" ng-model="customerDTO.address.city" ng-maxlength="30" ng-required="true" maxlength="30" />
+
+                <p class="text-danger no-margin error" ng-show="form.city.$invalid && (form.city.$dirty || form.$submitted)">Pole wymagane</p>
+                <p class="text-danger no-margin error" ng-show="form.city.$error.maxlength && (form.city.$dirty || form.$submitted)">Nazwa miasta powinna składać się maksymalnie z 30 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>Street</label>
+                <input type="text" name="street" ng-model="customerDTO.address.street" ng-maxlength="30" ng-required="true" maxlength="30" />
+
+                <p class="text-danger no-margin error" ng-show="form.street.$invalid && (form.street.$dirty || form.$submitted)">Pole wymagane</p>
+                <p class="text-danger no-margin error" ng-show="form.street.$error.maxlength && (form.street.$dirty || form.$submitted)">Nazwa ulicy powinna składać się maksymalnie z 30 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" name="country" ng-model="customerDTO.address.country" ng-maxlength="30" ng-required="true" maxlength="30" />
+
+                <p class="text-danger no-margin error" ng-show="form.country.$invalid && (form.country.$dirty || form.$submitted)">Pole wymagane</p>
+                <p class="text-danger no-margin error" ng-show="form.country.$error.maxlength && (form.country.$dirty || form.$submitted)">Nazwa państwa powinna składać się maksymalnie z 30 znaków</p>
+            </div>
+
+            <div class="form-group">
+                <label>House Number</label>
+                <input type="text" name="houseNumber" ng-model="customerDTO.address.houseNumber" maxlength="10" />
+            </div>
+
+            <div class="form-group">
+                <label>Local Number</label>
+                <input type="text" name="localNumber" ng-model="customerDTO.address.localNumber" maxlength="10" />
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-lg btn-info" ng-click="back()">Back</button>
+                <button type="submit" class="btn btn-lg btn-success" ng-disabled="">Save</button>
+            </div>
+
+        </div>
+    </div>
+
+</form>

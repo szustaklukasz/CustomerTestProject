@@ -37,8 +37,8 @@ namespace CustomerTestProject.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]CustomerDTO dto)
+        [HttpPut]
+        public void Put([FromBody]CustomerDTO dto)
         {
             _customerDomainService.Update(dto);
         }

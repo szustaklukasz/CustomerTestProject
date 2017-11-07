@@ -18,6 +18,11 @@ namespace CustomerTestProject.DAL.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<CustomerEntity>()
+             .HasOne(p => p.Address)
+             .WithOne(b => b.Customer)
+             .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<CustomerEntity>().Map();
             modelBuilder.Entity<AddressEntity>().Map();
         }

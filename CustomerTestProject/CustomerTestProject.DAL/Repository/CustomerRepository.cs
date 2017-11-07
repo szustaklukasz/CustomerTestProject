@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using CustomerTestProject.DAL.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerTestProject.DAL.Repository
 {
@@ -23,7 +24,7 @@ namespace CustomerTestProject.DAL.Repository
 
         public CustomerEntity Get(int id)
         {
-            return _context.Customers.SingleOrDefault(x => x.Id == id);
+            return _context.Customers.Include(x => x.Address).SingleOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<CustomerEntity> GetAll()
@@ -33,7 +34,7 @@ namespace CustomerTestProject.DAL.Repository
 
         public void Remove(int id)
         {
-            CustomerEntity customer = _context.Customers.SingleOrDefault(x => x.Id == id);
+            CustomerEntity customer = _context.Customers.Include(x => x.Address).SingleOrDefault(x => x.Id == id);
             if (customer == null)
                 throw new InvalidOperationException("Cannot delete customer");
 

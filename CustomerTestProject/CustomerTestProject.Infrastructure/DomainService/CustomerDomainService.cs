@@ -1,8 +1,6 @@
 ﻿using CustomerTestProject.DAL.Interface;
 using CustomerTestProject.Infrastructure.Interface;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using CustomerTestProject.Infrastructure.DTO;
 using AutoMapper;
 using CustomerTestProject.DAL.Entity;
@@ -22,6 +20,7 @@ namespace CustomerTestProject.Infrastructure.DomainService
         {
             var entity = Mapper.Map<CustomerEntity>(dto);
             _customerRepository.Add(entity);
+            _customerRepository.SaveChanges();
         }
 
         public CustomerDTO Get(int id)
@@ -39,12 +38,14 @@ namespace CustomerTestProject.Infrastructure.DomainService
         public void Remove(int id)
         {
             _customerRepository.Remove(id);
+            _customerRepository.SaveChanges();
         }
 
         public void Update(CustomerDTO dto)
         {
-            var entity = Mapper.Map<CustomerEntity>(dto);
-            _customerRepository.Update(entity);
+            var customerEntity = Mapper.Map<CustomerEntity>(dto);
+            _customerRepository.Update(customerEntity);
+            _customerRepository.SaveChanges();
         }
     }
 }
