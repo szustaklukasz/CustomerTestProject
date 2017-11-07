@@ -11,6 +11,10 @@ using Microsoft.Extensions.Options;
 using CustomerTestProject.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using CustomerTestProject.Infrastructure.Utility;
+using CustomerTestProject.Infrastructure.Interface;
+using CustomerTestProject.Infrastructure.DomainService;
+using CustomerTestProject.DAL.Interface;
+using CustomerTestProject.DAL.Repository;
 
 namespace CustomerTestProject
 {
@@ -28,6 +32,8 @@ namespace CustomerTestProject
         {
             services.AddDbContext<DatabaseContext>(options =>
                options.UseSqlServer("Data Source=VEGUS-LAPTOP;Initial Catalog=CustomerTestProject;Integrated Security=True;Pooling=False"));
+            services.AddScoped<ICustomerDomainService, CustomerDomainService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddMvc();
         }
@@ -36,6 +42,8 @@ namespace CustomerTestProject
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, DatabaseContext context)
         {
             app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             AutoMapperConfig.RegisterMappings();
         }
     }
